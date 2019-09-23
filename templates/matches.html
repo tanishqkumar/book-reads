@@ -1,0 +1,43 @@
+<!--this page is to list a bunch of divs containing information about all the books that matches their search result-->
+
+{% extends "layout.html"%}
+{% block main %}
+
+<style>
+
+#card {
+width: 12rem;
+margin: 20px 20px 20px 20px;
+}
+
+.containerX {
+  text-align: center;
+  align: center;
+  padding-left: 5%;
+}
+
+</style>
+
+  <h2 align="center">Search Results</h2><hr>
+  <main class="containerX">
+<div class="row">
+{% for match in matches %}
+        <div class="card border-primary mb-3" id="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ match.title }}</h5>
+              <p class="card-text">{{ match.author }}</p>
+              <p class="card-text">{{ match.year }}</p>
+              <p class="card-text">{{ match.isbn }}</p>
+              <a href="{{ url_for('book', isbn= match.isbn )}}" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+{% endfor %}
+</div>
+  </main>
+
+
+
+
+
+
+{% endblock %}

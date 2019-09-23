@@ -1,0 +1,69 @@
+<!-- This is the page that will be automatically generated for each page's ISBN number, containgin all the content via Jinja2-->
+
+
+<!--this page is to list a bunch of divs containing information about all the books that matches their search result-->
+
+{% extends "layout.html"%}
+{% block main %}
+<!--Need to have two div's at the top for 1) the book info 2) the goodreads review -->
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5>{{ bookInfo.title }}</h5>
+      <p>{{ bookInfo.author }}</p>
+      <p>{{ bookInfo.year }}</p>
+      <p>{{ bookInfo.isbn }}</p>
+    </div>
+    <div class="col-sm">
+      <p><strong> Number of Goodreads ratings: </strong> {{ noRatings }}</p>
+      <p><strong> Average Goodreads rating: </strong> {{ avgRating }}</p>
+    </div>
+  </div>
+</div>
+  <!--at this point we have a line then the submissions container below this--><hr>
+  <div class="alert alert-warning" role="alert" align="center">
+  <strong><h3>User Reviews</h3></strong>
+  </div>
+  <div class="row container justify-content-center">
+        <form action="{{ url_for('book', isbn= bookInfo.isbn )}}" method="post" class="form-border">
+          <div class="form-row">
+              <div class="form-group col-sm">
+        <select class="form-control" name="rating" style="margin-top: 15%;">
+          <option selected disabled>Rating</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+              </div>
+              <div class="form-group col-sm-6">
+                  <div class="input-group">
+      <textarea class="form-control" rows="3" name="review" placeholder="What did you think of this book?"></textarea>
+                  </div>
+              </div>
+                <div class="form-group col-sm">
+    <button type="submit" class="btn btn-primary mb-2" style="margin-top: 15%">Submit Review</button>
+                </div>
+        </form>
+
+<!--this div below will contain all the reviews by looping over the db-->
+  <div class="container-fluid list-group">
+    <ul class="list-group">
+      {% for review in bookReviews %}
+    <small><strong> {{ review.username }} said... </strong></small>
+    <li class="list-group-item list-group-item-action flex-column align-items-start" style="border-radius: 10px">
+      <div class="d-flex w-100 justify-content-between">{{ review.review }}</div>
+    </li>
+    <small><strong>Rated: {{ review.rating }} </strong></small>
+    <div class="dropdown-divider"></div>
+      {% endfor %}
+  </ul>
+  </div>
+
+
+</div>
+</main>
+
+{% endblock %}

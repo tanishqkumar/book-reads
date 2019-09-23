@@ -1,0 +1,16 @@
+{% extends "layout.html"%}
+{% block main %}
+
+
+<form action="/search" method="post">
+  <div class="form-group">
+    <label for="searchbox">Book Search</label>
+    <input type="text" class="form-control" name="query" placeholder="Enter part of a book name, author, or ISBN">
+  </div>
+    <small id="passRec" class="form-text text-muted">We've cataloged over 5,000 books!</small><p></p>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+
+{% endblock %}
