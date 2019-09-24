@@ -60,7 +60,7 @@ def search():
     if request.method=="POST":
         query = request.form.get("query").lower()
         matches = []
-        matches = db.execute(f"""SELECT * FROM books WHERE (isbn LIKE ('%{query}%') OR LOWER(title) LIKE ('%{query}%') OR LOWER(author) LIKE ('%{query}%') OR LOWER(year) LIKE ('%{query}%'))""").fetchall()
+        matches = db.execute(f"SELECT * FROM books WHERE (isbn LIKE ('%{query}%') OR LOWER(title) LIKE ('%{query}%') OR LOWER(author) LIKE ('%{query}%') OR LOWER(year) LIKE ('%{query}%'))").fetchall()
         if matches == []:
             return "There were no results that matched your query."
         return render_template("matches.html", matches=matches)
