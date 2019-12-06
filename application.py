@@ -65,9 +65,6 @@ def search():
             return "There were no results that matched your query."
         return render_template("matches.html", matches=matches)
 
-    if request.method=="GET":
-        return render_template("search.html")
-
 # make a new /api/<isbn> route that takes GET requests and returns JSONs for other peoples' use
 @app.route("/api/<isbn>")
 def api(isbn):
